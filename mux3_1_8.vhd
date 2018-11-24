@@ -11,5 +11,6 @@ architecture mux3_1_8_beh of mux3_1_8 is
 begin
   s <= a when ctl="00" else
        b when ctl="01" else
-       c;
+       c when ctl="10" else
+       "XXXXXXXX";
 end mux3_1_8_beh;
