@@ -15,8 +15,17 @@ architecture pc_test of pc_tb is
   signal s: std_logic_vector(6 downto 0);
 
 begin
-  clk1: entity work.clock(clock_architecture) port map(clk => clk);
   uut: entity work.pc(pc_beh) port map(clk => clk, rst => rst, s => s);
+
+  -- señal de clock
+  process
+  begin
+    clk <= '0';
+    wait for 30 ns;
+    clk <= '1';
+    wait for 30 ns;
+  end process;
+
   process
   begin
     rst <= '1';

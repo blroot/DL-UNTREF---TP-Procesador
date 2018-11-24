@@ -18,9 +18,17 @@ architecture reg8_test of reg8_tb is
   signal din,dout: std_logic_vector(7 downto 0);
 
 begin
-  clk1: entity work.clock(clock_architecture) port map(clk => clk);
   uut: entity work.reg8(reg8_beh) 
     port map(clk => clk, we => we, rst => rst, din => din, dout => dout);
+
+  -- señal de clock
+  process
+  begin
+    clk <= '0';
+    wait for 30 ns;
+    clk <= '1';
+    wait for 30 ns;
+  end process;
 
   process
   begin

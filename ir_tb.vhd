@@ -18,9 +18,17 @@ architecture ir_test of ir_tb is
   signal din,dout: std_logic_vector(15 downto 0);
 
 begin
-  clk1: entity work.clock(clock_architecture) port map(clk => clk);
   uut: entity work.ir(ir_beh) 
     port map(clk => clk, we => we, rst => rst, din => din, dout => dout);
+
+  -- señal de clock
+  process
+  begin
+    clk <= '0';
+    wait for 30 ns;
+    clk <= '1';
+    wait for 30 ns;
+  end process;
 
   process
   begin

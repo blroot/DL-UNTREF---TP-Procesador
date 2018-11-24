@@ -28,9 +28,18 @@ architecture regs_test of Regs_tb is
   --signal clko: std_logic;
 
 begin
-  clk1: entity work.clock(clock_architecture) port map(clk => clk);
   uut: entity work.Regs(registers_table_arq) 
     port map(clk => clk, rst => rst, we => we, rd => rd, rs => rs, din => din, dout => dout);
+  
+  -- señal de clock
+  process
+  begin
+    clk <= '0';
+    wait for 30 ns;
+    clk <= '1';
+    wait for 30 ns;
+  end process;
+
   process
     begin
 
