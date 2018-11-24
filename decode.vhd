@@ -10,14 +10,88 @@ entity decode is
 	bus_sel : out  std_logic_vector (1 downto 0));
 end decode; 
 
--- aplicamos minimizacion a las funciones de decode
 architecture decode_beh of decode is
 begin
-  bus_sel <= "10" when input=x"01" else "01" when input=x"05" else "00";
-  alu_op <= "010" when input=x"10" else "011" when input=x"11" else "100" when input=x"12" else
-            "101" when input=x"13" else "110" when input=x"14" else "001" when input=x"20" else
-            "111" when input=x"21" else "000";
-  reg_a_we <= '1' when (input=x"04" or input=x"05") else '0';
-  out_we <= '1' when input=x"02" else '0';
-  reg_we <= '0' when (input=x"02" or input=x"04" or input=x"05") else '1';
+  process(input)
+  begin
+    case input is
+        -- IN
+        when x"01" => bus_sel <= "10";
+                      alu_op <= "000";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        -- OUT
+        when x"02" => bus_sel <= "00";
+                      alu_op <= "000";
+                      reg_a_we <= '0';
+                      out_we <= '1';
+                      reg_we <= '0';
+        -- MOV
+        when x"03" => bus_sel <= "00";
+                      alu_op <= "000";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        -- LDA
+        when x"04" => bus_sel <= "00";
+                      alu_op <= "000";
+                      reg_a_we <= '1';
+                      out_we <= '0';
+                      reg_we <= '0';
+        -- LDI
+        when x"05" => bus_sel <= "01";
+                      alu_op <= "000";
+                      reg_a_we <= '1';
+                      out_we <= '0';
+                      reg_we <= '0';
+        -- ADD
+        when x"10" => bus_sel <= "00";
+                      alu_op <= "010";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        -- SUB
+        when x"11" => bus_sel <= "00";
+                      alu_op <= "011";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        -- AND
+        when x"12" => bus_sel <= "00";
+                      alu_op <= "100";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        -- OR
+        when x"13" => bus_sel <= "00";
+                      alu_op <= "101";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        -- XOR
+        when x"14" => bus_sel <= "00";
+                      alu_op <= "110";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        -- SHL
+        when x"20" => bus_sel <= "00";
+                      alu_op <= "001";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        -- SHR
+        when x"21" => bus_sel <= "00";
+                      alu_op <= "111";
+                      reg_a_we <= '0';
+                      out_we <= '0';
+                      reg_we <= '1';
+        when others => bus_sel <= "XX";
+                       alu_op <= "XXX";
+                       reg_a_we <= 'X';
+                       out_we <= 'X';
+                       reg_we <= 'X';
+    end case;
+  end process;
 end decode_beh;
