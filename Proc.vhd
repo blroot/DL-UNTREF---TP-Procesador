@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------------------
--- Realizado por la catedra  Dise駉 L骻ico (UNTREF) en 2015
+-- Realizado por la catedra  Dise帽o L贸gico (UNTREF) en 2015
 -- Tiene como objeto brindarle a los alumnos un template del procesador requerido
--- Profesores Mart韓 V醶quez - Lucas Leiva
+-- Profesores Mart铆n V谩zquez - Lucas Leiva
 ----------------------------------------------------------------------------------
 
 library IEEE;
@@ -17,7 +17,7 @@ end Proc;
 architecture Beh_Proc of Proc is
 
 -- ================
--- Declaraci髇 de los componentes utilziados
+-- Declaraci贸n de los componentes utilizados
 
 component regs 
     Port ( clk : in  std_logic;
@@ -34,29 +34,54 @@ component alu port ( op: in  std_logic_vector(2 downto 0);
            s : out  std_logic_vector (7 downto 0));
 end component;
 
-component rom_prog port (addr : in  std_logic_vector (6 downto 0);
-					output : out  std_logic_vector (15 downto 0));
+component rom_prog port (addr : in  std_logic_vector (7 downto 0);
+			 output : out  std_logic_vector (15 downto 0));
 end component; 
 
 
-component decode port (input : in  std_logic_vector (8 downto 0);
-					reg_we : out  std_logic;
-					out_we : out  std_logic;
-					reg_a_we: out  std_logic;
-					alu_op : out  std_logic_vector (2 downto 0);
-					bus_sel : out  std_logic_vector (1 downto 0));
+component decode port (input : in  std_logic_vector (7 downto 0);
+			reg_we : out  std_logic;
+			out_we : out  std_logic;
+			reg_a_we: out  std_logic;
+			alu_op : out  std_logic_vector (2 downto 0);
+			bus_sel : out  std_logic_vector (1 downto 0));
 end component; 
 
 
 -- ================
 
 -- ================
--- declaraci髇 de se馻les usadas 
+-- declaraci贸n de se帽ales usadas 
 
--- Banco de registros
-signal we: std_logic; -- senal para escribir en el banco de registro 
-signal rd, rs: std_logic_vector(3 downto 0);
--- signal ....
+-- Conexion entre Program Counter y ROM
+signal sg_pc: std_logic_vector(7 downto 0);
+-- Conexion entre ROM y el IR
+signal sg_rom: std_logic_vector(15 downto 0);
+-- Conexion de la salida del IR
+signal sg_irout: std_logic_vector(15 downto 0);
+-- Bus de datos entre el Banco-Mux-Alu-Reg_A
+signal sg_bus1: std_logic_vector(7 downto 0);
+-- Bus de datos entre Alu-Banco-Reg_Out
+signal sg_bus2: std_logic_vector(7 downto 0);
+
+-- Conexiones del DECODE
+-- habilitar escritura banco de registros
+signal sg_reg_we : std_logic;
+-- habilitar escritura de Reg_Out
+signal sg_out_we : std_logic;
+-- habilitar escritura de Reg_A
+signal sg_reg_a_we: std_logic;
+-- Determinar operacion de la Alu
+signal sg_alu_op : std_logic_vector (2 downto 0);
+-- Seleccionar canal del Multiplexor
+signal sg_bus_sel : std_logic_vector (1 downto 0);
+
+-- Conexion del Reg_A con Alu
+signal sg_rega_out: std_logic_vector(7 downto 0);
+
+-- Banco de registro
+-- senal para escribir en el banco de registro
+signal sg_we: std_logic; 
 
 -- ================
 
@@ -66,30 +91,41 @@ begin
 -- Instaciacion de componentes utilziados
 
 -- Banco de registros
-eregs:  regs Port map (clk => clk, rst => rst, we => we, 
-								rd => rd, rs => rs, 
-								din =>, dout => ); -- hay que cpmpletar esta instanciaci髇
+eregs:  regs port map (clk => clk, rst => rst, we => sg_we, 
+			rd => sg_irout(7 downto 4), rs => sg_irout(3 downto 0), 
+			din => sg_bus2, dout => sg_bus1 ); -- hay que cpmpletar esta instanciaci贸n
 -- La ALU
-eAlu: alu port map ();
+eAlu: alu port map (op => sg_alu_op,
+			a => sg_bus1,
+			b => sg_rega_out,
+			s => sg_bus2);
 
 -- La ROM de programa
-eROM_Prog: rom_prog port map ();
+eROM_Prog: rom_prog port map ( addr => sg_pc
+                               , output => sg_rom
+);
 
--- El decodificador de la instrucci髇
-eDecode: decode port map ();
+-- El decodificador de la instrucci贸n
+eDecode: decode port map ( input => sg_irout(15 downto 8)
+			  , reg_we => sg_reg_we
+			  , out_we => sg_out_we
+			  , reg_a_we => sg_reg_a_we
+			  , alu_op => sg_alu_op
+			  , bus_sel => sg_bus_sel
+);
 
 -- ================
 
 
 -- ================
--- Descripci髇 de mux que funciona como "bus"
+-- Descripci贸n de mux que funciona como "bus"
 -- controlado por bus_sel
 
 -- ================
 
 
 -- ================
--- Descripci髇 de los almacenamientos
+-- Descripci贸n de los almacenamientos
 -- Los almacenamientos que se deben decribir aca son: 
 -- <reg_a> 8 bits
 -- <reg_out> de 8 bits
@@ -110,4 +146,3 @@ eDecode: decode port map ();
 
 
 end Beh_Proc;
-
