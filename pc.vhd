@@ -16,10 +16,11 @@ begin
   begin
     if (rst='1') then
       s_buf <= "0000000";
-      s <= s_buf;
+      --s <= s_buf;
     elsif (rising_edge(clk)) then
       s_buf <= std_logic_vector(unsigned(s_buf) + "1");
-      s <= s_buf;
+      --s <= s_buf;
     end if;
   end process;
+  s <= s_buf;
 end pc_beh;
