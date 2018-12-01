@@ -46,43 +46,43 @@ begin
                       out_we <= '0';
                       reg_we <= '0';
         -- ADD
-        when x"10" => bus_sel <= "00";
+        when x"0A" => bus_sel <= "00";
                       alu_op <= "010";
                       reg_a_we <= '0';
                       out_we <= '0';
                       reg_we <= '1';
         -- SUB
-        when x"11" => bus_sel <= "00";
+        when x"0B" => bus_sel <= "00";
                       alu_op <= "011";
                       reg_a_we <= '0';
                       out_we <= '0';
                       reg_we <= '1';
         -- AND
-        when x"12" => bus_sel <= "00";
+        when x"0C" => bus_sel <= "00";
                       alu_op <= "100";
                       reg_a_we <= '0';
                       out_we <= '0';
                       reg_we <= '1';
         -- OR
-        when x"13" => bus_sel <= "00";
+        when x"0D" => bus_sel <= "00";
                       alu_op <= "101";
                       reg_a_we <= '0';
                       out_we <= '0';
                       reg_we <= '1';
         -- XOR
-        when x"14" => bus_sel <= "00";
+        when x"0E" => bus_sel <= "00";
                       alu_op <= "110";
                       reg_a_we <= '0';
                       out_we <= '0';
                       reg_we <= '1';
         -- SHL
-        when x"20" => bus_sel <= "00";
+        when x"14" => bus_sel <= "00";
                       alu_op <= "001";
                       reg_a_we <= '0';
                       out_we <= '0';
                       reg_we <= '1';
         -- SHR
-        when x"21" => bus_sel <= "00";
+        when x"15" => bus_sel <= "00";
                       alu_op <= "111";
                       reg_a_we <= '0';
                       out_we <= '0';
