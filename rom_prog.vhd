@@ -15,8 +15,10 @@ architecture rom_prog_beh of rom_prog is
             case addr is 
                 -- 0: in r3 
                 when "0000000" => output <= "0000000100110000";
+		-- prueba... lo mando al output
+                --when "0000001" => output <= "0000001000000011";
                 -- 1: lda r3
-                when "0000001" => output <= "0000010000110000";
+                when "0000001" => output <= "0000010000000011";
                 -- 2: add r4, r3
                 when "0000010" => output <= "0000101001000011";
                 -- 3: sub r5,r4
@@ -28,21 +30,21 @@ architecture rom_prog_beh of rom_prog is
                 -- 6: mov r14, r4
                 when "0000110" => output <= "0000001111100100";
                 -- 7: out r3
-                when "0000111" => output <= "0000001000110000";
+                when "0000111" => output <= "0000001000000011";
                 -- 8: out r4
-                when "0001000" => output <= "0000001001000000";
+                when "0001000" => output <= "0000001000000100";
                 -- 9: out r5
-                when "0001001" => output <= "0000001001010000";
+                when "0001001" => output <= "0000001000000101";
                 -- 10: out r6
-                when "0001010" => output <= "0000001001100000";
+                when "0001010" => output <= "0000001000000110";
                 -- 11: out r7
-                when "0001011" => output <= "0000001001110000";
+                when "0001011" => output <= "0000001000000111";
                 -- 12: out r8
-                when "0001100" => output <= "0000001010000000";
+                when "0001100" => output <= "0000001000001000";
                 -- 13: out r13
-                when "0001101" => output <= "0000001011010000";
+                when "0001101" => output <= "0000001000001101";
                 -- 14: out r14
-                when "0001110" => output <= "0000001011100000";
+                when "0001110" => output <= "0000001000001110";
                 when others => output <= "XXXXXXXXXXXXXXXX";
             end case;
         end process;      
