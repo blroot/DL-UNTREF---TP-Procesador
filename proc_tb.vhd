@@ -19,6 +19,9 @@ architecture proc_test of proc_tb is
     signal sg_input: std_logic_vector (7 downto 0);
     signal sg_output: std_logic_vector (7 downto 0);
 
+ -- CLOCK DEL PROCESADOR 10 ns
+ constant clock : time:= 10 ns;
+
 begin
     uut: entity work.proc(Beh_Proc) 
     port map(
@@ -28,100 +31,29 @@ begin
                 , output => sg_output
             );
 
-    -- señal de clock
-    process
-    begin
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-        sg_clk <= '0';
-        wait for 10 ns;
-        sg_clk <= '1';
-        wait for 10 ns;
-    end process;
+    -- seÃ±al de clock
+      Pclk:  process
+        begin
+          sg_clk <= '1';
+          wait for clock;
+          sg_clk<= '0';
+          wait for clock;  
+      end process;
 
-    -- cuerpo del test
-    process
-    begin
-
-        sg_input <= "10101010"; 
-        sg_output <= "00000000"; 
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;
-	sg_rst <= '0';
-        wait for 11 ns;        
-	
+      -- proceso de reset se le da un periodo multiplicado por 30 para dar un tiempo extra y que se ejecuten TODAS las instrucciones  
+     PReset :process
+       begin
+       sg_rst <= '1';
+       wait for clock/4;
+       sg_rst <= '0';
+       wait for clock*30;
+     end process;
+      
+      --Estimulo de entrada
+      IN_preset: process
+        begin
+        sg_input <= x"03";
         wait;
-    end process;
+      end process;
+
 end proc_test; 
