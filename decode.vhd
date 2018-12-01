@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity decode is
-  port (input : in  std_logic_vector (15 downto 8);
+  port (input : in  std_logic_vector (7 downto 0);
 	reg_we : out  std_logic;
 	out_we : out  std_logic;
 	reg_a_we: out  std_logic;
