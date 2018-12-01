@@ -8,16 +8,16 @@ architecture pc_test of pc_tb is
 
   component pc is
     port(clk,rst: in std_logic;
-         s: out std_logic_vector(6 downto 0));
+         s: out std_logic_vector(7 downto 0));
   end component;
 
   signal clk,rst: std_logic;
-  signal s: std_logic_vector(6 downto 0);
+  signal s: std_logic_vector(7 downto 0);
 
 begin
   uut: entity work.pc(pc_beh) port map(clk => clk, rst => rst, s => s);
 
-  -- señal de clock
+  -- seÃ±al de clock
   process
   begin
     clk <= '0';
