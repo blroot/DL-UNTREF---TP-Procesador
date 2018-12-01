@@ -18,7 +18,7 @@ architecture rom_prog_beh of rom_prog is
                 -- 1: lda r3
                 when "0000001" => output <= "0000010000110000";
                 -- 2: add r4, r3
-                when "0000110" => output <= "0000101001000011";
+                when "0000010" => output <= "0000101001000011";
                 -- 3: sub r5,r4
                 when "0000011" => output <= "0000101101010100";
                 -- 4: or r6, r4
