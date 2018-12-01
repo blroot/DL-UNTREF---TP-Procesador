@@ -23,28 +23,28 @@ architecture Beh_Proc of Proc is
 
 component regs 
     Port    ( 
-                clk : in     std_logic;
-                rst : in     std_logic;
+                clk : in std_logic;
+                rst : in std_logic;
                 we : in std_logic;
                 rd : in std_logic_vector (3 downto 0);
                 rs : in std_logic_vector (3 downto 0);
-                din : in     std_logic_vector (7 downto 0);
-                dout : out  std_logic_vector (7 downto 0)
+                din : in std_logic_vector (7 downto 0);
+                dout : out std_logic_vector (7 downto 0)
             );
 end component;
 
 component alu 
     port    ( 
-                op: in   std_logic_vector(2 downto 0);
-                a,b : in     std_logic_vector (7 downto 0);
+                op: in std_logic_vector(2 downto 0);
+                a,b : in std_logic_vector (7 downto 0);
                 s : out std_logic_vector (7 downto 0)
             );
 end component;
 
 component rom_prog 
     port    (
-                addr : in   std_logic_vector (6 downto 0);
-                output : out  std_logic_vector (15 downto 0)
+                addr : in std_logic_vector (6 downto 0);
+                output : out std_logic_vector (15 downto 0)
             );
 end component; 
 
@@ -117,9 +117,8 @@ signal sg_bus_sel : std_logic_vector (1 downto 0);
 -- Conexion del Reg_A con Alu
 signal sg_rega_out: std_logic_vector(7 downto 0);
 
--- Banco de registro
--- senal para escribir en el banco de registro
-signal sg_we: std_logic; 
+-- Conexiones del Banco con el Mux
+signal sg_regs_out: std_logic_vector(7 downto 0);
 
 -- ================
 
@@ -132,11 +131,11 @@ begin
 eregs:  regs port map   (
                               clk => clk
                             , rst => rst
-                            , we => sg_we
+                            , we => sg_reg_we
                             , rd => sg_irout(3 downto 0)
                             , rs => sg_irout(7 downto 4)
                             , din => sg_bus2
-                            , dout => sg_bus1 
+                            , dout => sg_regs_out 
                         ); -- hay que cpmpletar esta instanciación
 -- La ALU
 eAlu: alu port map  (
@@ -170,7 +169,7 @@ eDecode: decode port map    (
 -- controlado por bus_sel
 
 elMux: mux3_1_8 port map    ( 
-                                  a => sg_bus1
+                                  a => sg_regs_out
                                 , b => sg_irout(7 downto 0)
                                 , c => input
                                 , ctl => sg_bus_sel
