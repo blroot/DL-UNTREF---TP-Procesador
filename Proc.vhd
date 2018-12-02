@@ -132,8 +132,10 @@ eregs:  regs port map   (
                               clk => clk
                             , rst => rst
                             , we => sg_reg_we
-                            , rd => sg_irout(3 downto 0)
-                            , rs => sg_irout(7 downto 4)
+                            --, rd => sg_irout(3 downto 0)
+                            --, rs => sg_irout(7 downto 4)
+			    , rd => sg_irout(7 downto 4)
+                            , rs => sg_irout(3 downto 0)
                             , din => sg_bus2
                             , dout => sg_regs_out 
                         ); -- hay que cpmpletar esta instanciación

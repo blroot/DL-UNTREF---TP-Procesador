@@ -34,9 +34,9 @@ begin
     -- señal de clock
       Pclk:  process
         begin
-          sg_clk <= '1';
+          sg_clk <= '0';
           wait for clock;
-          sg_clk<= '0';
+          sg_clk<= '1';
           wait for clock;  
       end process;
 
@@ -46,7 +46,7 @@ begin
        sg_rst <= '1';
        wait for clock/4;
        sg_rst <= '0';
-       wait for clock*30;
+       wait for clock*32;
      end process;
       
       --Estimulo de entrada
