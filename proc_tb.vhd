@@ -40,13 +40,13 @@ begin
           wait for clock;  
       end process;
 
-      -- proceso de reset se le da un periodo multiplicado por 42 para dar un tiempo extra y que se ejecuten TODAS las instrucciones  
+      -- proceso de reset se le da un periodo multiplicado por 46 para dar un tiempo extra y que se ejecuten TODAS las instrucciones  
      PReset :process
        begin
        sg_rst <= '1';
        wait for clock/4;
        sg_rst <= '0';
-       wait for clock*42;
+       wait for clock*46;
      end process;
       
       --Estimulo de entrada

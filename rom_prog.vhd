@@ -34,11 +34,11 @@ architecture rom_prog_beh of rom_prog is
                 when "0000111" => output <= "0000010110101010";
                 -- 8: in <RD> --> in r8
                 when "0001000" => output <= "0000000110000000";
-                -- 9: xor <RD> <RS> --> and r13, r8
+                -- 9: xor <RD> <RS> --> xor r13, r8
                 when "0001001" => output <= "0000111011011000";
                 -- 10: shr <RD> <RS> --> shr r9, r8
                 when "0001010" => output <= "0001010110011000";
-                -- 11: shl <RD> <RS> --> shr r10, r13
+                -- 11: shl <RD> <RS> --> shl r10, r13
                 when "0001011" => output <= "0001010010101101";
                 -- ===================================================================
 		-- 12: out <RS> --> out r3
