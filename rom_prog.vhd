@@ -16,8 +16,6 @@ architecture rom_prog_beh of rom_prog is
                 -- <INSTRUCCION><RD><RS> 
                 -- 0: in <RD> --> in r3 
                 when "0000000" => output <= "0000000100110000";
-		-- prueba... lo mando al output
-                --when "0000001" => output <= "0000001000000011";
                 -- 1: lda <RS> --> lda r3
                 when "0000001" => output <= "0000010000000011";
                 -- 2: add <RD> <RS> --> add r4, r3
@@ -30,22 +28,42 @@ architecture rom_prog_beh of rom_prog is
                 when "0000101" => output <= "0000110001110000";
                 -- 6: mov <RD> <RS> --> mov r14, r4
                 when "0000110" => output <= "0000001111100100";
-                -- 7: out <RS> --> out r3
-                when "0000111" => output <= "0000001000000011";
-                -- 8: out r4
-                when "0001000" => output <= "0000001000000100";
-                -- 9: out r5
-                when "0001001" => output <= "0000001000000101";
-                -- 10: out r6
-                when "0001010" => output <= "0000001000000110";
-                -- 11: out r7
-                when "0001011" => output <= "0000001000000111";
-                -- 12: out r8
-                when "0001100" => output <= "0000001000001000";
-                -- 13: out r13
-                when "0001101" => output <= "0000001000001101";
-                -- 14: out r14
-                when "0001110" => output <= "0000001000001110";
+                -- ===================================================================
+		-- AGREGAMOS PARA USAR LOS REGISTROS FALTANTES Y OTRAS INSTRUCCIONES
+                -- 7: ldi <valor> --> ldi "10101010"
+                when "0000111" => output <= "0000010110101010";
+                -- 8: in <RD> --> in r8
+                when "0001000" => output <= "0000000110000000";
+                -- 9: xor <RD> <RS> --> and r13, r8
+                when "0001001" => output <= "0000111011011000";
+                -- 10: shr <RD> <RS> --> shr r9, r8
+                when "0001010" => output <= "0001010110011000";
+                -- 11: shl <RD> <RS> --> shr r10, r13
+                when "0001011" => output <= "0001010010101101";
+                -- ===================================================================
+		-- 12: out <RS> --> out r3
+                when "0001100" => output <= "0000001000000011";
+                -- 13: out r4
+                when "0001101" => output <= "0000001000000100";
+                -- 14: out r5
+                when "0001110" => output <= "0000001000000101";
+                -- 15: out r6
+                when "0001111" => output <= "0000001000000110";
+                -- 16: out r7
+                when "0010000" => output <= "0000001000000111";
+                -- 17: out r8
+                when "0010001" => output <= "0000001000001000";
+                -- ===================================================================
+		-- AGREGAMOS LOS OUT PARA LAS INSTRUCCIONES NUEVAS
+                -- 18: out r9
+                when "0010010" => output <= "0000001000001001";
+                -- 19: out r10
+                when "0010011" => output <= "0000001000001010";
+                -- ===================================================================
+                -- 20: out r13
+                when "0010100" => output <= "0000001000001101";
+                -- 21: out r14
+                when "0010101" => output <= "0000001000001110";
                 when others => output <= "XXXXXXXXXXXXXXXX";
             end case;
         end process;      
