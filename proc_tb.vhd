@@ -40,7 +40,7 @@ begin
           wait for clock;  
       end process;
 
-      -- proceso de reset se le da un periodo multiplicado por 30 para dar un tiempo extra y que se ejecuten TODAS las instrucciones  
+      -- proceso de reset se le da un periodo multiplicado por 32 para dar un tiempo extra y que se ejecuten TODAS las instrucciones  
      PReset :process
        begin
        sg_rst <= '1';
