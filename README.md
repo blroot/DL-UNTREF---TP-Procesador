@@ -15,9 +15,8 @@ Lottero Bruno
 	 - [Contador de programa](#contador-de-programa-pc)
 	 - [Unidad de decodificación](#unidad-de-decodificación-decode)
 	 - [Banco de registros](#banco-de-registros-regs)
-	 - [Registro acumulador](#registro-acumulador-reg_a)
+	 - [Registro acumulador y Registro de salida](#registro-acumulador-reg_a-y-registro-de-salida-reg_out)
 	 - [Unidad aritmético lógica](#unidad-aritmético-lógica-alu)
-	 - [Registro de salida](#registro-de-salida-reg_out)
  - [Problemas encontrados y sus respectivas soluciones](#problemas-encontrados-y-sus-respectivas-soluciones)
  - [Programa a ejecutar](#programa-a-ejecutar)
  - [Conclusiones](#conclusiones)
@@ -28,7 +27,7 @@ Para el desarrollo del procesador se decidió llevar a cabo un diseño jerárqui
 
 Uno de los beneficios que encontramos sobre esta forma de diseño es que nos permitió hacer testbench de manera temprana sobre cada uno de los componentes, brindando una mejor seguridad sobre el correcto funcionamiento del desarrollo final.
 
-Sobre el diseño del procesador, podemos observar que su nivel de abstracción es RTL (Register-Transfer level) por lo tanto, podemos pensar que no debería haber mayores problemas para sintetizar la descripción realizada.
+Sobre el diseño del procesador, podemos observar que su nivel de abstracción es RTL (Register-Transfer level) ya que en el mismo se declaran registros y lógica que opera entre estos. Por lo tanto, podemos pensar que no debería haber mayores problemas para sintetizar la descripción realizada.
 
 A continuación se exponen detalles de diseño de cada uno de los componentes:
 
@@ -72,8 +71,9 @@ Nos resultaría interesante saber de qué manera beneficia en este punto la mini
  - Estilo de descripción
 	 - algorítmico
 
-### Registro acumulador (Reg_a)
-
+### Registro acumulador (Reg_a) y Registro de salida (Reg_out)
+ 
+ - Se instancian del mismo componente (reg8) 
  - Estilo de descripción
 	 - algorítmico
 
@@ -81,11 +81,11 @@ Nos resultaría interesante saber de qué manera beneficia en este punto la mini
 
  - Estilo de descripción
 	 - Flujo de datos
+	 
+## MUX de tres entradas de 8 bits
 
-### Registro de salida (Reg_out)
-
- - Estilo de descripción
-	 - algorítmico
+- Estilo de descripción
+	 - Flujo de datos 
 
 ## Problemas encontrados y sus respectivas soluciones
 
