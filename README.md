@@ -17,6 +17,7 @@ Lottero Bruno
 	 - [Banco de registros](#banco-de-registros-regs)
 	 - [Registro acumulador y Registro de salida](#registro-acumulador-reg_a-y-registro-de-salida-reg_out)
 	 - [Unidad aritmético lógica](#unidad-aritmético-lógica-alu)
+	 - [MUX de tres entradas de 8 bits](#mux-de-tres-entradas-de-8-bits)
  - [Problemas encontrados y sus respectivas soluciones](#problemas-encontrados-y-sus-respectivas-soluciones)
  - [Programa a ejecutar](#programa-a-ejecutar)
  - [Conclusiones](#conclusiones)
