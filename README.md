@@ -82,7 +82,7 @@ Nos resultaría interesante saber de qué manera beneficia en este punto la mini
  - Estilo de descripción
 	 - Flujo de datos
 	 
-## MUX de tres entradas de 8 bits
+### MUX de tres entradas de 8 bits
 
 - Estilo de descripción
 	 - Flujo de datos 
