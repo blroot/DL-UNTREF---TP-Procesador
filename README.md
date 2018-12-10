@@ -20,6 +20,7 @@ Lottero Bruno
 	 - [MUX de tres entradas de 8 bits](#mux-de-tres-entradas-de-8-bits)
  - [Problemas encontrados y sus respectivas soluciones](#problemas-encontrados-y-sus-respectivas-soluciones)
  - [Programa a ejecutar](#programa-a-ejecutar)
+	 - [Test benches](#test-benches)
  - [Conclusiones](#conclusiones)
 
 ## Descripción del diseño
@@ -128,6 +129,24 @@ Hicimos algunos cambios al programa almacenado, para utilizar los registros falt
 | 20 | OUT r13 |
 | 21 | OUT r14 |
 
+### Test benches
+
+Para compilar el proyecto sugerimos el siguiente orden
+
+|Peso| Descripción |
+|--|--|
+| 0 | rom_prog.vhd |
+| 1 | alu.vhd |
+| 2 | decode.vhd |
+| 3 | ir.vhd |
+| 4 | mux3_1_8.vhd |
+| 5 | pc.vhd |
+| 6 | reg8.vhd |
+| 7 | Regs.vhd |
+| 8 | Proc.vhd |
+ 
+ Y luego, todos los archivos **_tb.vhd* que corresponden a cada uno de los test benches realizados. El TB perteneciente al procesador es ***proc_tb.vhd***
+
 ## Conclusiones
 
 #### Sobre el lenguaje y la herramienta (ModelSim)
@@ -136,4 +155,3 @@ Nos resultó positivo que la herramienta esté disponible para estudiantes con l
 En el apartado del aprendizaje del lenguaje, coincidimos en que las mayores dificultades se presentaron sobre los primeros contactos con VHDL y el simulador, siendo quizás los errores de compilación los problemas que mas nos llevó tiempo comprender. Luego de algunas horas de práctica notamos que la curva de aprendizaje fué mas sencilla.
 
 Por último, queremos concluír que VHDL nos resultó una herramienta muy poderosa para realizar esta simulación. Por otro lado, el trabajo que nos ha servido como puerta de entrada al lenguaje, nos deja con la expectativa a futuro de experimentar con herramientas de síntesis y tal vez con una FPGA.
-
